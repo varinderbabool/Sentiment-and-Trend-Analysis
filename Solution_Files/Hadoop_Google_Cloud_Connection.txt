@@ -1,0 +1,36 @@
+//Download following jar
+gcs-connector-1.2.8-hadoop1.jar
+
+//Append following code to core-site.xml
+   <property>
+        <name>fs.gs.impl</name>
+        <value>com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem</value>
+   </property>
+   <property>
+         <name>fs.gs.project.id</name>
+        <value>sylvan-ocean-345419</value>
+   </property>
+   <property>
+         <name>fs.gs.system.bucket</name>
+        <value>https://console.cloud.google.com/storage/browser/staging_hadoop_2455</value>
+   </property>
+   <property>
+        <name>fs.gs.working.dir</name>
+        <value>/</value>
+   </property>
+   <property>
+        <name>fs.gs.auth.service.account.enable</name>
+        <value>true</value>
+   </property>
+   <property>
+        <name>fs.gs.auth.service.account.email</name>
+        <value>hadoopgcp@sylvan-ocean-345419.iam.gserviceaccount.com</value>
+   </property>
+   <property>
+        <name>fs.gs.auth.service.account.keyfile</name>
+        <value>/root/gcskey.p12</value>
+   </property>
+
+// Once the connection is sepup, we can access google cloud from local hadoop cluster
+//copy final sentiment_analysis data to google cloud 
+hadoop fs -cp /apps/hive/warehouse/sentiment_analysis.db/tweets_sent_final/ gs://sentiment-analysis/
